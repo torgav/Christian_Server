@@ -37,4 +37,8 @@ public class ChristianServer{
         }
         serverMulticastSocket.close();
     }
+    public static String readMsg(String msg){
+        
+        return "0";
+    }
 }
