@@ -37,8 +37,11 @@ public class ChristianServer{
         }
         serverMulticastSocket.close();
     }
-    public static String readMsg(String msg){
-        
+    public static String mathSolver(String equation){
+        String[] elements = equation.split("");
+        if(elements.length != 3){
+                return "Invalid Input"
+        }
         return "0";
     }
 }
