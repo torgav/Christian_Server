@@ -31,7 +31,7 @@ public class ChristianServer{
         }
         }
     public static String mathSolver(String msg){
-        String[] elements = msg.split("");
+        String[] elements = msg.split(" ");
         if(elements.length != 3){
                 return "Invalid Input";
         }
@@ -41,16 +41,16 @@ public class ChristianServer{
                 String op = elements[1];
                 int answear;
 
-                if(op == "+"){
+                if(op.equals("+")){
                         answear = numb1+numb2;
                         return "The answear for: "+ numb1 +" + "+ numb2 +" = "+answear;  
-                }else if(op == "/"){
+                }else if(op.equals("/")){
                         answear = numb1/numb2;
                         return "The answear for: "+ numb1 +" / "+ numb2 +" = "+answear; 
-                }else if(op == "-"){
+                }else if(op.equals("-")){
                         answear = numb1-numb2;
                         return "The answear for: "+ numb1 +" - "+ numb2 +" = "+answear; 
-                }else if(op == "*"){
+                }else if(op.equals("*")){
                         answear = numb1*numb2;
                         return "The answear for: "+ numb1 +" * "+ numb2 +" = "+answear; 
                 }else{
