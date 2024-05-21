@@ -40,7 +40,14 @@ public class ChristianServer{
     public static String mathSolver(String equation){
         String[] elements = equation.split("");
         if(elements.length != 3){
-                return "Invalid Input"
+                return "Invalid Input";
+        }
+
+        try{ 
+                int numb1 = Integer.parseInt(elements[0]);
+                int numb2 = Integer.parseInt(elements[2]);
+
+
         }
         return "0";
     }
