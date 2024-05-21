@@ -20,7 +20,7 @@ public class ChristianServer{
         InetAddress group =
                 InetAddress.getByName("225.4.5.6");
 
-        // getByName- returns IP address of given host
+        // getByName- returns IP address of given hos
         serverMulticastSocket.joinGroup(group);
         System.out.println("joinGroup method is called...");
         boolean infinite = true;
