@@ -42,13 +42,29 @@ public class ChristianServer{
         if(elements.length != 3){
                 return "Invalid Input";
         }
-
         try{ 
                 int numb1 = Integer.parseInt(elements[0]);
                 int numb2 = Integer.parseInt(elements[2]);
+                String op = elements[1];
+                int answear;
 
-
+                if(op == "+"){
+                        answear = numb1+numb2;
+                        return "The answear for: "+ numb1 +" + "+ numb2 +" = "+answear;  
+                }else if(op == "/"){
+                        answear = numb1/numb2;
+                        return "The answear for: "+ numb1 +" / "+ numb2 +" = "+answear; 
+                }else if(op == "-"){
+                        answear = numb1-numb2;
+                        return "The answear for: "+ numb1 +" - "+ numb2 +" = "+answear; 
+                }else if(op == "*"){
+                        answear = numb1*numb2;
+                        return "The answear for: "+ numb1 +" * "+ numb2 +" = "+answear; 
+                }else{
+                        return "Unvalid use of op";
+                }
+        }catch (NumberFormatException e) {
+            return "Invalid number format";
         }
-        return "0";
     }
 }
