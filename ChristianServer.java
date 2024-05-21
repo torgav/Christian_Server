@@ -1,44 +1,37 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.*;
 
 public class ChristianServer{
 
-    public static void main(String args[])
-            throws Exception {
-
-        // Default port number we are going to use
-        int portnumber = 4446;
-        if (args.length >= 1) {
-            portnumber = Integer.parseInt(args[0]);
+    public static void main(String[] args) {
+        int port = 4446; 
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            System.out.println("\n\nServer started. Listening on port " + port);
+            while (true) {
+                try (Socket clientSocket = serverSocket.accept();
+                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
+                    String inputLine;
+                    while ((inputLine = in.readLine()) != null) {
+                        String response = mathSolver(inputLine);
+                        out.println(response);
+                    }
+                } catch (IOException e) {
+                    System.out.println("\n\nException caught when trying to listen on port "
+                            + port + " or listening for a connection");
+                    System.out.println(e.getMessage());
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("\n\nCould not listen on port " + port);
+            System.out.println(e.getMessage());
         }
-
-        // Create a MulticastSocket
-        MulticastSocket serverMulticastSocket =
-                new MulticastSocket(portnumber);
-        System.out.println("MulticastSocket is created at port " + portnumber);
-
-        // Determine the IP address of a host, given the host name
-        InetAddress group =
-                InetAddress.getByName("225.4.5.6");
-
-        // getByName- returns IP address of given hos
-        serverMulticastSocket.joinGroup(group);
-        System.out.println("joinGroup method is called...");
-        boolean infinite = true;
-
-        // Continually receives data and prints them
-        while (infinite) {
-            byte buf[] = new byte[1024];
-            DatagramPacket data =
-                    new DatagramPacket(buf, buf.length);
-            serverMulticastSocket.receive(data);
-            String msg =
-                    new String(data.getData()).trim();
-            System.out.println("Message received from client = " + msg);
         }
-        serverMulticastSocket.close();
-    }
-    public static String mathSolver(String equation){
-        String[] elements = equation.split("");
+    public static String mathSolver(String msg){
+        String[] elements = msg.split("");
         if(elements.length != 3){
                 return "Invalid Input";
         }
